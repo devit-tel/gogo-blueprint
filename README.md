@@ -1,16 +1,16 @@
-# gogo-blueprint
+# gogo-blueprint 🔥
 simple project - implement api service by golang
 
 
 
 ---
 #### TODO
--[ ] documents cmd
+- [ ] documents cmd
 
--[ ] unit test handler http (app zone) 
+- [ ] unit test handler http (app zone) 
 
--[ ] log http request
+- [ ] log http request
 
--[ ] golang docker for deployment
+- [ ] golang docker for deployment
 
--[ ] folder structure description
+- [ ] folder structure description
