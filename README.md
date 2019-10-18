@@ -1,2 +1,11 @@
-# gogo-blueprint
-Blueprint/Boilerplate for Golang Projects
+# gogo-boilerplate
+simple project - implement api service by golang
+
+
+
+---
+#### TODO
+-[ ] documents cmd
+-[ ] unit test handler http (app zone) 
+-[ ] log http request
+-[ ] golang docker for deployment
