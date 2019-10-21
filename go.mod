@@ -3,6 +3,7 @@ module github.com/devit-tel/gogo-blueprint
 go 1.13
 
 require (
+	github.com/bshuster-repo/logrus-logstash-hook v0.4.1
 	github.com/caarlos0/env/v6 v6.1.0
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/devit-tel/goerror v0.0.0-20191015075050-b0665b653b7e
@@ -19,8 +20,10 @@ require (
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/opentracing-contrib/go-gin v0.0.0-20190301172248-2e18f8b9c7d4
 	github.com/opentracing/opentracing-go v1.1.0
+	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
 	github.com/tidwall/pretty v1.0.0 // indirect
+	github.com/toorop/gin-logrus v0.0.0-20190701131413-6c374ad36b67
 	github.com/uber/jaeger-client-go v2.19.0+incompatible
 	github.com/uber/jaeger-lib v2.2.0+incompatible // indirect
 	github.com/ugorji/go v1.1.7 // indirect

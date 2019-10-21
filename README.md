@@ -9,7 +9,9 @@ simple project - implement api service by golang
 
 - [ ] unit test handler http (app zone) 
 
-- [ ] log http request
+- [x] log http request to elasticsearch via logstash
+
+- [x] jaeger tracing
 
 - [ ] golang docker for deployment
 

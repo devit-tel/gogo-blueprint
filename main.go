@@ -5,14 +5,22 @@ import (
 	"github.com/devit-tel/jaegerstart"
 	"github.com/gin-gonic/gin"
 	"github.com/opentracing-contrib/go-gin/ginhttp"
+	ginlogrus "github.com/toorop/gin-logrus"
 )
 
 func main() {
 	// Load config
 	appConfig := config.Get()
 
+	// Init log format & stdout to logstash (udp)
+	log := setupLog()
+	setupHookToLogstash(log, appConfig)
+
 	// Gin setup
-	router := gin.Default()
+	router := gin.New()
+
+	// Set custom log for gin
+	router.Use(ginlogrus.Logger(log), gin.Recovery())
 
 	// Jaeger setup
 	if appConfig.JaegerEndpoint != "" {
