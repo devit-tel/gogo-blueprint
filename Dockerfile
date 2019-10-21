@@ -10,7 +10,6 @@ COPY . .
 # Enable go module
 ENV GO111MODULE=on
 # Fetch dependencies
-# Using go get
 RUN go mod download
 # Build the binary
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-w -s" -o /go/bin/gogo-blueprint
@@ -23,5 +22,5 @@ FROM scratch
 EXPOSE 8080
 # Copy our static executable.
 COPY --from=builder /go/bin/gogo-blueprint /go/bin/gogo-blueprint
-# Run the hello binary
+# Run the gogo-blueprint binary
 ENTRYPOINT ["/go/bin/gogo-blueprint"]
