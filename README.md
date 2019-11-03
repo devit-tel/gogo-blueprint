@@ -8,6 +8,7 @@ simple project - implement api service by golang
 - [x]  Logstash to ElasticSearch
 - [x]  Implement Application, Service, Repository, domain Layer
 - [ ]  Kubenetes Deployment
+- [ ]  Gitlab CI
 
 ---
 ### Folder Structure
@@ -16,6 +17,8 @@ simple project - implement api service by golang
   /app                        # application layer
     /inout                    # api input / output
       /company
+      	company.go           
+	craeteCompany.go      # create company input / output
     app.go                    # setup api handlers
     createCompany.go          # api
     createCompany_test.go     # api testing
@@ -42,7 +45,7 @@ simple project - implement api service by golang
     /company
       /mocks                  # repository mocks for testing
       /store                  # repository implement interface
-      repository.go           # repository interface
+      repository.go           # repository interface & repository errors
 
   /service                    # service layer for control domains
     /company
