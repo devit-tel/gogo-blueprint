@@ -1,9 +1,17 @@
 # gogo-blueprint 🔥
 simple project - implement api service by golang
 
-
+#### Blueprint
+- [x]  Support Jaeger
+- [x]  MongoDB
+- [x]  Unit Test & Integration Test (DB)
+- [x]  Logstash to ElasticSearch
+- [x]  Implement Application, Service, Repository, domain Layer
+- [ ]  Kubenetes Deployment
 
 ---
+### Folder Structure
+
 ```
   /app                        # application layer
     /inout                    # api input / output
@@ -45,7 +53,19 @@ simple project - implement api service by golang
   setup.go                    # load and setup dependency
 ```
 
+
 ---
+
+### Installation
+
+```
+  git clone https://github.com/devit-tel/gogo-blueprint.git
+  cd gogo-blueprint
+  go mod download
+```
+
+
+
 ### Testing 
 unit testing command
 
@@ -68,6 +88,7 @@ generate mocks from interfaces for unit testing
   go generate ./...
 ```
 
+
 ### Local development
 development in local start mongodb, elasticsearch + kibana, jaeger
 
@@ -77,8 +98,17 @@ source ./local.env
 docker-compose up -d
 ```
 
+### Tracing with Jaeger
+tracing operation with jaeger
 
-### Style Guide
+```go
+	if span := jaegerstart.StartNewSpan(CONTEXT, OPERATION_NAME); span != nil {
+		defer span.Finish()
+	}
+```
+
+
+### Others
 
 - uber golang style guide [link](https://github.com/uber-go/guide)
 
