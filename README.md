@@ -4,15 +4,81 @@ simple project - implement api service by golang
 
 
 ---
-#### TODO
-- [ ] documents cmd
+```
+  /app                        # application layer
+    /inout                    # api input / output
+      /company
+    app.go                    # setup api handlers
+    createCompany.go          # api
+    createCompany_test.go     # api testing
 
-- [ ] unit test handler http (app zone) 
+  /config                     # load config (from env)
+    config.go
 
-- [x] log http request to elasticsearch via logstash
+  /deployment                 # kubernetes config for deploy
 
-- [x] jaeger tracing
+  /development                # development tools (db, jaeger, local env)
+    docker-compose.yml        # docker mongodb, elasticsearch + kibana, jaeger
+    local.env                 # local env for integration test
 
-- [ ] golang docker for deployment
+  /domain                     # business logic layer
+    /company
+      company.go
+      company_test.go
 
-- [ ] folder structure description
+  /external                   # external service layer
+  
+  /lib                        # internal library
+  
+  /repository                 # repository layer
+    /company
+      /mocks                  # repository mocks for testing
+      /store                  # repository implement interface
+      repository.go           # repository interface
+
+  /service                    # service layer for control domains
+    /company
+      /mocks                  # mock service for testing
+      create.go
+ 
+  main.go                     # initial application
+  setup.go                    # load and setup dependency
+```
+
+---
+### Testing 
+unit testing command
+
+```
+  go test ./...
+```
+
+integrating testing command
+
+```
+  go test ./... -tags integration
+```
+
+
+### Generate Mocks
+
+generate mocks from interfaces for unit testing
+
+```
+  go generate ./...
+```
+
+### Local development
+development in local start mongodb, elasticsearch + kibana, jaeger
+
+```
+cd development
+source ./local.env
+docker-compose up -d
+```
+
+
+### Style Guide
+
+- uber golang style guide [link](https://github.com/uber-go/guide)
+
