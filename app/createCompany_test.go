@@ -53,6 +53,18 @@ func (suite *AppTestSuite) Test_CreateCompany() {
 	suite.Equal(expectResponse, respData)
 }
 
+func (suite *AppTestSuite) Test_CreateCompany_InvalidRequest() {
+	input := &company.CreateCompanyInput{Name: ""}
+	req, resp := buildRequestCreateCompany("success", input)
+
+	errorJsonString := `{"errors":[{"fieldName":"Name","reason":"required","value":""}],"message":"invalid request","type":"InvalidRequest"}`
+
+	suite.router.ServeHTTP(resp, req)
+
+	suite.Equal(http.StatusBadRequest, resp.Code)
+	suite.Equal(errorJsonString, string(resp.Body.Bytes()))
+}
+
 func (suite *AppTestSuite) Test_CreateCompany_MethodNotFound() {
 	input := &company.CreateCompanyInput{Name: "CompanyTest"}
 	req, resp := buildRequestCreateCompany("notFound", input)
