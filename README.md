@@ -1,4 +1,9 @@
 # gogo-blueprint 🔥
+
+<p align="left">
+  <a href="https://github.com/devit-tel/gogo-blueprint"><img alt="GitHub Actions status" src="https://github.com/devit-tel/gogo-blueprint/workflows/go-unit-test/badge.svg"></a>
+</p>
+
 simple project - implement api service by golang
 
 #### Blueprint

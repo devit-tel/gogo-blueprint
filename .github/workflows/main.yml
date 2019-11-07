@@ -16,5 +16,11 @@ jobs:
         uses: actions/checkout@v1
       - name: Run mongdb
         uses: wbari/start-mongoDB@v0.2
-      - name: Test
-        run: source ./development/local.env && go test ./... -tags integration
+      - name: Unit Test & Integration Test
+        run: go test ./... -tags integration
+        env:
+          MONGODB_ENDPOINT: "mongodb://localhost:27017"
+          MONGODB_COMPANY_TABLE_NAME: "company_test"
+          MONGODB_STAFF_TABLE_NAME: "staff_test"
+          MONGODB_NAME: "go_project"
+          APP_NAME: "gogo_blueprint"
