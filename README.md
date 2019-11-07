@@ -59,6 +59,13 @@ simple project - implement api service by golang
 
 ---
 
+### Pre-Require
+
+Mockery
+```
+GO111MODULE=off go get github.com/vektra/mockery/.../
+```
+
 ### Installation
 
 ```
