@@ -24,3 +24,5 @@ jobs:
           MONGODB_STAFF_TABLE_NAME: "staff_test"
           MONGODB_NAME: "go_project"
           APP_NAME: "gogo_blueprint"
+          JAEGER_ENDPOINT: "http://localhost:9411/api/v1/spans"
+          LOGSTASH_ENDPOINT: "localhost:5514"
