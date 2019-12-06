@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/devit-tel/gogo-blueprint/config"
-	"github.com/devit-tel/jaegerstart"
 	"github.com/gin-gonic/gin"
-	"github.com/opentracing-contrib/go-gin/ginhttp"
 	ginlogrus "github.com/toorop/gin-logrus"
+
+	"github.com/devit-tel/gogo-blueprint/config"
 )
 
 func main() {
@@ -23,11 +22,12 @@ func main() {
 	router.Use(ginlogrus.Logger(log), gin.Recovery())
 
 	// Jaeger setup
-	if appConfig.JaegerEndpoint != "" {
-		tracer, closer := setupJaeger(appConfig)
-		defer closer.Close()
-		router.Use(ginhttp.Middleware(tracer, jaegerstart.LogRequestOption()))
-	}
+	closer := setupJaeger(appConfig)
+	defer func() {
+		if err := closer.Close(); err != nil {
+			log.Error(err)
+		}
+	}()
 
 	// Register route to gin
 	_ = newApp(appConfig).RegisterRoute(router)

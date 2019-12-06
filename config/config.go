@@ -14,7 +14,8 @@ type Config struct {
 	MongoDBCompanyTableName string `env:"MONGODB_COMPANY_TABLE_NAME,required"`
 
 	// Jaeger config
-	JaegerEndpoint string `env:"JAEGER_ENDPOINT,required"`
+	JaegerAgentHost string `env:"JAEGER_AGENT_HOST,required"`
+	JaegerAgentPort string `env:"JAEGER_AGENT_PORT,required"`
 
 	// 	Logstash config
 	LogstashEndpoint string `env:"LOGSTASH_ENDPOINT,required"`

@@ -26,3 +26,5 @@ jobs:
           APP_NAME: "gogo_blueprint"
           JAEGER_ENDPOINT: "http://localhost:9411/api/v1/spans"
           LOGSTASH_ENDPOINT: "localhost:5514"
+          JAEGER_AGENT_HOST: localhost
+          JAEGER_AGENT_PORT: 6831
