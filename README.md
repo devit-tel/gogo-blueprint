@@ -54,6 +54,7 @@ simple project - implement api service by golang
 
   /service                    # service layer for control domains
     /company
+      /withtracer	      # implement jaeger trace by wrap service interface
       /mocks                  # mock service for testing
       create.go
  
