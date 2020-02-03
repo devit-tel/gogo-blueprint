@@ -2,10 +2,11 @@ package app
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+
+	"github.com/stretchr/testify/mock"
 
 	"github.com/devit-tel/gogo-blueprint/app/inout/company"
 	domainCompany "github.com/devit-tel/gogo-blueprint/domain/company"
@@ -38,7 +39,7 @@ func (suite *AppTestSuite) Test_CreateCompany() {
 	input := &company.CreateCompanyInput{Name: "CompanyTest"}
 	req, resp := buildRequestCreateCompany("success", input)
 
-	suite.companyService.On("CreateCompany", context.Background(), &serviceCompany.CreateCompanyInput{Name: input.Name}).Return(&domainCompany.Company{
+	suite.companyService.On("CreateCompany", mock.Anything, &serviceCompany.CreateCompanyInput{Name: input.Name}).Return(&domainCompany.Company{
 		Id:   "test_1",
 		Name: "CompanyTest",
 	}, nil)

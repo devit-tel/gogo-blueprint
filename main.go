@@ -11,9 +11,8 @@ func main() {
 	// Load config
 	appConfig := config.Get()
 
-	// Init log format & stdout to logstash (udp)
+	// Init log format
 	log := setupLog()
-	setupHookToLogstash(log, appConfig)
 
 	// Gin setup
 	router := gin.New()
