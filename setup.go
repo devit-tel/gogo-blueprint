@@ -4,7 +4,6 @@ import (
 	"io"
 	"log"
 
-	logrustash "github.com/bshuster-repo/logrus-logstash-hook"
 	"github.com/devit-tel/goxid"
 	"github.com/opentracing/opentracing-go"
 	"github.com/sirupsen/logrus"
@@ -17,7 +16,9 @@ import (
 	companyRepo "github.com/devit-tel/gogo-blueprint/repository/company/store"
 	staffRepo "github.com/devit-tel/gogo-blueprint/repository/staff/store"
 	companyService "github.com/devit-tel/gogo-blueprint/service/company"
+	companyServiceTracer "github.com/devit-tel/gogo-blueprint/service/company/withtracer"
 	staffService "github.com/devit-tel/gogo-blueprint/service/staff"
+	staffServiceTracer "github.com/devit-tel/gogo-blueprint/service/staff/withtracer"
 )
 
 func setupJaeger(appConfig *config.Config) io.Closer {
@@ -28,6 +29,7 @@ func setupJaeger(appConfig *config.Config) io.Closer {
 	cfg.ServiceName = appConfig.AppName
 	cfg.Sampler.Type = "const"
 	cfg.Sampler.Param = 1
+	cfg.Reporter = &jaegercfg.ReporterConfig{LogSpans: true}
 
 	jLogger := jaegerlog.StdLogger
 	jMetricsFactory := metrics.NullFactory
@@ -48,26 +50,17 @@ func newApp(appConfig *config.Config) *app.App {
 	xid := goxid.New()
 
 	companyStore := companyRepo.New(appConfig.MongoDBEndpoint, appConfig.MongoDBName, appConfig.MongoDBCompanyTableName)
-	company := companyService.New(xid, companyStore)
+	company := companyServiceTracer.Wrap(companyService.New(xid, companyStore))
 
 	staffStore := staffRepo.New(appConfig.MongoDBEndpoint, appConfig.MongoDBName, appConfig.MongoDBStaffTableName)
-	staff := staffService.New(xid, staffStore, companyStore)
+	staff := staffServiceTracer.Wrap(staffService.New(xid, staffStore, companyStore))
 
 	return app.New(staff, company)
 }
 
 func setupLog() *logrus.Logger {
-	log := logrus.New()
-	log.SetFormatter(&logrus.JSONFormatter{})
+	lr := logrus.New()
+	lr.SetFormatter(&logrus.JSONFormatter{})
 
-	return log
-}
-
-func setupHookToLogstash(logger *logrus.Logger, appConfig *config.Config) {
-	hook, err := logrustash.NewHook("udp", appConfig.LogstashEndpoint, appConfig.AppName)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	logger.Hooks.Add(hook)
+	return lr
 }

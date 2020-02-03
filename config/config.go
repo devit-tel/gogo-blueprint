@@ -16,9 +16,6 @@ type Config struct {
 	// Jaeger config
 	JaegerAgentHost string `env:"JAEGER_AGENT_HOST,required"`
 	JaegerAgentPort string `env:"JAEGER_AGENT_PORT,required"`
-
-	// 	Logstash config
-	LogstashEndpoint string `env:"LOGSTASH_ENDPOINT,required"`
 }
 
 func Get() *Config {

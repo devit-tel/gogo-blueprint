@@ -114,16 +114,10 @@ docker-compose up -d
 ```
 
 ### Tracing with Jaeger
-tracing operation with jaeger
-
-```go
-	if span := jaegerstart.StartNewSpan(CONTEXT, OPERATION_NAME); span != nil {
-		defer span.Finish()
-	}
-```
+please see in the example code implement jaeger wrap service ```service/company/withtracer```
 
 
 ### Others
 
-- uber golang style guide [link](https://github.com/uber-go/guide)
-
+- Uber golang style guide [link](https://github.com/uber-go/guide)
+- Practical Go: Real world advice for writing maintainable Go programs [link](https://dave.cheney.net/practical-go/presentations/qcon-china.html?fbclid=IwAR2_D2Y2HXVYUNiG3LctB0kF64YKzGUatcIHm_sLYwm9SEqEKWAd76G7NAU)
