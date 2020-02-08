@@ -18,5 +18,5 @@ func ConnectMongoDB(clientOptions *options.ClientOptions) (*mongo.Client, error)
 		panic(err)
 	}
 
-	return db, err
+	return db, nil
 }
