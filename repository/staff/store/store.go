@@ -2,7 +2,7 @@ package store
 
 import (
 	"context"
-	"github.com/devit-tel/gogo-blueprint/external/mongodb"
+	"github.com/devit-tel/gogo-blueprint/lib/mongodb"
 
 	"github.com/devit-tel/goerror"
 	"go.mongodb.org/mongo-driver/bson"
@@ -16,7 +16,7 @@ import (
 func New(mongoEndpoint, dbName, collectionName string) *Store {
 	clientOptions := options.Client().ApplyURI(mongoEndpoint)
 
-	db, _ := mongodb.ConnectMongoDB(clientOptions)
+	db, _ := mongodb.NewConnection(clientOptions)
 
 	return &Store{
 		dbName:         dbName,
