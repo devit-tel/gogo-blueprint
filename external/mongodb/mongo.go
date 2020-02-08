@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func ConnectMongoDB(clientOptions *options.ClientOptions) (*mongo.Client, error) {
+func NewConnection(clientOptions *options.ClientOptions) (*mongo.Client, error) {
 	db, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		panic(err)
