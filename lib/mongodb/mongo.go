@@ -11,11 +11,11 @@ import (
 func NewConnection(clientOptions *options.ClientOptions) (*mongo.Client, error) {
 	db, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	if err = db.Ping(context.Background(), readpref.Primary()); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	return db, nil
