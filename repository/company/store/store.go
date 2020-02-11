@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"github.com/devit-tel/gogo-blueprint/lib/mongodb"
 
 	"github.com/devit-tel/goerror"
 	"go.mongodb.org/mongo-driver/bson"
@@ -13,7 +14,7 @@ import (
 )
 
 type Store struct {
-	mongo          *mongo.Client
+	db             *mongo.Client
 	dbName         string
 	collectionName string
 }
@@ -21,20 +22,17 @@ type Store struct {
 func New(mongoEndpoint, dbName, collectionName string) *Store {
 	clientOptions := options.Client().ApplyURI(mongoEndpoint)
 
-	db, err := mongo.Connect(context.Background(), clientOptions)
-	if err != nil {
-		panic(err)
-	}
+	db, _ := mongodb.NewConnection(clientOptions)
 
 	return &Store{
 		dbName:         dbName,
 		collectionName: collectionName,
-		mongo:          db,
+		db:             db,
 	}
 }
 
 func (s *Store) collectionCompany() *mongo.Collection {
-	return s.mongo.Database(s.dbName).Collection(s.collectionName)
+	return s.db.Database(s.dbName).Collection(s.collectionName)
 }
 
 func (s *Store) Get(ctx context.Context, companyId string) (*domain.Company, goerror.Error) {
