@@ -2,8 +2,10 @@ package store
 
 import (
 	"context"
+	"log"
+	"time"
 
-	"github.com/devit-tel/gogo-blueprint/lib/mongodb"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 
 	"github.com/devit-tel/goerror"
 	"go.mongodb.org/mongo-driver/bson"
@@ -23,7 +25,16 @@ type Store struct {
 func New(mongoEndpoint, dbName, collectionName string) *Store {
 	clientOptions := options.Client().ApplyURI(mongoEndpoint)
 
-	db, _ := mongodb.NewConnection(clientOptions)
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+
+	db, err := mongo.Connect(ctx, clientOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err = db.Ping(ctx, readpref.Primary()); err != nil {
+		log.Fatal(err)
+	}
 
 	return &Store{
 		dbName:         dbName,
