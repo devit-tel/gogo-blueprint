@@ -6,7 +6,7 @@ import (
 	domainCompany "github.com/devit-tel/gogo-blueprint/domain/company"
 )
 
-func (s *companyService) TestCompanyService_CreateCompany() {
+func (s *companySuite) TestCompanyService_CreateCompany() {
 	expectedCompany := &domainCompany.Company{Id: "xxx_1", Name: "NextComp"}
 
 	s.xid.Freeze("xxx_1")

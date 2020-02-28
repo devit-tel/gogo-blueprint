@@ -9,7 +9,7 @@ import (
 	"github.com/devit-tel/gogo-blueprint/repository/company/mocks"
 )
 
-type companyService struct {
+type companySuite struct {
 	suite.Suite
 	companyRepository *mocks.Repository
 	xid               *goxid.ID
@@ -17,10 +17,10 @@ type companyService struct {
 }
 
 func TestRunSuite(t *testing.T) {
-	suite.Run(t, new(companyService))
+	suite.Run(t, new(companySuite))
 }
 
-func (s *companyService) SetupTest() {
+func (s *companySuite) SetupTest() {
 	s.xid = goxid.New()
 	s.companyRepository = &mocks.Repository{}
 	s.service = New(s.xid, s.companyRepository)

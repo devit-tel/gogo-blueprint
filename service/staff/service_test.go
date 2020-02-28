@@ -12,7 +12,7 @@ import (
 	mockStaff "github.com/devit-tel/gogo-blueprint/repository/staff/mocks"
 )
 
-type staffService struct {
+type staffSuite struct {
 	suite.Suite
 	companyRepository *mockCompany.Repository
 	staffRepository   *mockStaff.Repository
@@ -22,10 +22,10 @@ type staffService struct {
 }
 
 func TestRunSuite(t *testing.T) {
-	suite.Run(t, new(staffService))
+	suite.Run(t, new(staffSuite))
 }
 
-func (s *staffService) SetupTest() {
+func (s *staffSuite) SetupTest() {
 	s.xid = goxid.New()
 	s.staffRepository = &mockStaff.Repository{}
 	s.companyRepository = &mockCompany.Repository{}

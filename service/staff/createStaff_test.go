@@ -7,7 +7,7 @@ import (
 	domainStaff "github.com/devit-tel/gogo-blueprint/domain/staff"
 )
 
-func (s *staffService) TestStaffService_CreateStaff() {
+func (s *staffSuite) TestStaffService_CreateStaff() {
 	expectedStaff := &domainStaff.Staff{Id: "xxx_1", CompanyId: "comp_1", Name: "Tester", Tel: "081-555-2222", CreatedAt: s.now.Unix(), UpdatedAt: s.now.Unix()}
 
 	s.xid.Freeze("xxx_1")

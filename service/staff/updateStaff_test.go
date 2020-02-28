@@ -6,7 +6,7 @@ import (
 	domainStaff "github.com/devit-tel/gogo-blueprint/domain/staff"
 )
 
-func (s *staffService) TestStaffService_UpdateStaff() {
+func (s *staffSuite) TestStaffService_UpdateStaff() {
 	oldStaff := &domainStaff.Staff{Id: "xxx_1", CompanyId: "comp_1", Name: "Tester", Tel: "081-555-2222", CreatedAt: s.now.Unix(), UpdatedAt: s.now.Unix()}
 	expectedStaff := &domainStaff.Staff{Id: "xxx_1", CompanyId: "comp_1", Name: "Tester2", Tel: "081-555-3333", CreatedAt: s.now.Unix(), UpdatedAt: s.now.Unix()}
 
