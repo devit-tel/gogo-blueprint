@@ -3,10 +3,11 @@ package app
 import (
 	"testing"
 
-	mockCompnay "github.com/devit-tel/gogo-blueprint/service/company/mocks"
-	mockStaff "github.com/devit-tel/gogo-blueprint/service/staff/mocks"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/suite"
+
+	mockCompnay "github.com/devit-tel/gogo-blueprint/service/company/mocks"
+	mockStaff "github.com/devit-tel/gogo-blueprint/service/staff/mocks"
 )
 
 type AppTestSuite struct {

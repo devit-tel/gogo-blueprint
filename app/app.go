@@ -1,9 +1,10 @@
 package app
 
 import (
+	"github.com/gin-gonic/gin"
+
 	"github.com/devit-tel/gogo-blueprint/service/company"
 	"github.com/devit-tel/gogo-blueprint/service/staff"
-	"github.com/gin-gonic/gin"
 )
 
 type App struct {

@@ -6,12 +6,14 @@ import (
 	"context"
 	"testing"
 
-	domain "github.com/devit-tel/gogo-blueprint/domain/staff"
-	repoStaff "github.com/devit-tel/gogo-blueprint/repository/staff"
 	"github.com/stretchr/testify/require"
 
-	"github.com/devit-tel/gogo-blueprint/config"
+	domain "github.com/devit-tel/gogo-blueprint/domain/staff"
+	repoStaff "github.com/devit-tel/gogo-blueprint/repository/staff"
+
 	"go.mongodb.org/mongo-driver/bson"
+
+	"github.com/devit-tel/gogo-blueprint/config"
 )
 
 func setup() *Store {

@@ -4,11 +4,12 @@ import (
 	"testing"
 	"time"
 
-	mockCompany "github.com/devit-tel/gogo-blueprint/repository/company/mocks"
-	mockStaff "github.com/devit-tel/gogo-blueprint/repository/staff/mocks"
 	"github.com/devit-tel/gotime"
 	"github.com/devit-tel/goxid"
 	"github.com/stretchr/testify/suite"
+
+	mockCompany "github.com/devit-tel/gogo-blueprint/repository/company/mocks"
+	mockStaff "github.com/devit-tel/gogo-blueprint/repository/staff/mocks"
 )
 
 type staffService struct {

@@ -3,9 +3,10 @@ package company
 import (
 	"testing"
 
-	"github.com/devit-tel/gogo-blueprint/repository/company/mocks"
 	"github.com/devit-tel/goxid"
 	"github.com/stretchr/testify/suite"
+
+	"github.com/devit-tel/gogo-blueprint/repository/company/mocks"
 )
 
 type companyService struct {
