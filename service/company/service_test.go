@@ -20,8 +20,8 @@ func TestRunSuite(t *testing.T) {
 	suite.Run(t, new(companyService))
 }
 
-func (suite *companyService) SetupTest() {
-	suite.xid = goxid.New()
-	suite.companyRepository = &mocks.Repository{}
-	suite.service = New(suite.xid, suite.companyRepository)
+func (s *companyService) SetupTest() {
+	s.xid = goxid.New()
+	s.companyRepository = &mocks.Repository{}
+	s.service = New(s.xid, s.companyRepository)
 }
