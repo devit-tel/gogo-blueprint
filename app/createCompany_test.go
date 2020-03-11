@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 
 	"github.com/stretchr/testify/mock"
 
@@ -54,6 +55,10 @@ func (s *AppTestSuite) Test_CreateCompany() {
 	s.Equal(expectResponse, respData)
 }
 
+func replaceResponse(bytesBody []byte) string {
+	return strings.Replace(string(bytesBody), "\n", "", -1)
+}
+
 func (s *AppTestSuite) Test_CreateCompany_InvalidRequest() {
 	input := &company.CreateCompanyInput{Name: ""}
 	req, resp := buildRequestCreateCompany("success", input)
@@ -63,7 +68,7 @@ func (s *AppTestSuite) Test_CreateCompany_InvalidRequest() {
 	s.router.ServeHTTP(resp, req)
 
 	s.Equal(http.StatusBadRequest, resp.Code)
-	s.Equal(errorJsonString, string(resp.Body.Bytes()))
+	s.Equal(errorJsonString, replaceResponse(resp.Body.Bytes()))
 }
 
 func (s *AppTestSuite) Test_CreateCompany_MethodNotFound() {
