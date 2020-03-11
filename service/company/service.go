@@ -4,9 +4,10 @@ import (
 	"context"
 
 	"github.com/devit-tel/goerror"
+	"github.com/devit-tel/goxid"
+
 	domainCompany "github.com/devit-tel/gogo-blueprint/domain/company"
 	"github.com/devit-tel/gogo-blueprint/repository/company"
-	"github.com/devit-tel/goxid"
 )
 
 //go:generate mockery -name=Service

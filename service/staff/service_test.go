@@ -4,14 +4,15 @@ import (
 	"testing"
 	"time"
 
-	mockCompany "github.com/devit-tel/gogo-blueprint/repository/company/mocks"
-	mockStaff "github.com/devit-tel/gogo-blueprint/repository/staff/mocks"
 	"github.com/devit-tel/gotime"
 	"github.com/devit-tel/goxid"
 	"github.com/stretchr/testify/suite"
+
+	mockCompany "github.com/devit-tel/gogo-blueprint/repository/company/mocks"
+	mockStaff "github.com/devit-tel/gogo-blueprint/repository/staff/mocks"
 )
 
-type staffService struct {
+type staffSuite struct {
 	suite.Suite
 	companyRepository *mockCompany.Repository
 	staffRepository   *mockStaff.Repository
@@ -21,17 +22,17 @@ type staffService struct {
 }
 
 func TestRunSuite(t *testing.T) {
-	suite.Run(t, new(staffService))
+	suite.Run(t, new(staffSuite))
 }
 
-func (suite *staffService) SetupTest() {
-	suite.xid = goxid.New()
-	suite.staffRepository = &mockStaff.Repository{}
-	suite.companyRepository = &mockCompany.Repository{}
+func (s *staffSuite) SetupTest() {
+	s.xid = goxid.New()
+	s.staffRepository = &mockStaff.Repository{}
+	s.companyRepository = &mockCompany.Repository{}
 
 	now := time.Now()
 	gotime.Freeze(now)
-	suite.now = now
+	s.now = now
 
-	suite.service = New(suite.xid, suite.staffRepository, suite.companyRepository)
+	s.service = New(s.xid, s.staffRepository, s.companyRepository)
 }

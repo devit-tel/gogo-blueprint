@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/devit-tel/goerror"
+
 	"github.com/devit-tel/gogo-blueprint/domain/company"
 )
 

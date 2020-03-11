@@ -3,10 +3,11 @@ package app
 import (
 	"testing"
 
-	mockCompnay "github.com/devit-tel/gogo-blueprint/service/company/mocks"
-	mockStaff "github.com/devit-tel/gogo-blueprint/service/staff/mocks"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/suite"
+
+	mockCompnay "github.com/devit-tel/gogo-blueprint/service/company/mocks"
+	mockStaff "github.com/devit-tel/gogo-blueprint/service/staff/mocks"
 )
 
 type AppTestSuite struct {
@@ -18,19 +19,19 @@ type AppTestSuite struct {
 	router *gin.Engine
 }
 
-func (suite *AppTestSuite) SetupTest() {
-	suite.staffService = &mockStaff.Service{}
-	suite.companyService = &mockCompnay.Service{}
+func (s *AppTestSuite) SetupTest() {
+	s.staffService = &mockStaff.Service{}
+	s.companyService = &mockCompnay.Service{}
 
-	app := New(suite.staffService, suite.companyService)
+	app := New(s.staffService, s.companyService)
 
 	gin.SetMode("release")
 	g := gin.New()
 
 	app.RegisterRoute(g)
 
-	suite.app = app
-	suite.router = g
+	s.app = app
+	s.router = g
 }
 
 func TestAppSuite(t *testing.T) {

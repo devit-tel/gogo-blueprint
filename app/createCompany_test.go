@@ -32,7 +32,7 @@ func buildRequestCreateCompany(mode string, input *company.CreateCompanyInput) (
 	return req, w
 }
 
-func (suite *AppTestSuite) Test_CreateCompany() {
+func (s *AppTestSuite) Test_CreateCompany() {
 	expectResponse := &company.CreateCompanyOutput{
 		Company: &company.Company{Id: "test_1", Name: "CompanyTest"},
 	}
@@ -40,42 +40,42 @@ func (suite *AppTestSuite) Test_CreateCompany() {
 	input := &company.CreateCompanyInput{Name: "CompanyTest"}
 	req, resp := buildRequestCreateCompany("success", input)
 
-	suite.companyService.On("CreateCompany", mock.Anything, &serviceCompany.CreateCompanyInput{Name: input.Name}).Return(&domainCompany.Company{
+	s.companyService.On("CreateCompany", mock.Anything, &serviceCompany.CreateCompanyInput{Name: input.Name}).Return(&domainCompany.Company{
 		Id:   "test_1",
 		Name: "CompanyTest",
 	}, nil)
 
-	suite.router.ServeHTTP(resp, req)
+	s.router.ServeHTTP(resp, req)
 
 	respData := &company.CreateCompanyOutput{}
 	err := json.Unmarshal(resp.Body.Bytes(), respData)
 
-	suite.NoError(err)
-	suite.Equal(http.StatusOK, resp.Code)
-	suite.Equal(expectResponse, respData)
+	s.NoError(err)
+	s.Equal(http.StatusOK, resp.Code)
+	s.Equal(expectResponse, respData)
 }
 
 func replaceResponse(bytesBody []byte) string {
 	return strings.Replace(string(bytesBody), "\n", "", -1)
 }
 
-func (suite *AppTestSuite) Test_CreateCompany_InvalidRequest() {
+func (s *AppTestSuite) Test_CreateCompany_InvalidRequest() {
 	input := &company.CreateCompanyInput{Name: ""}
 	req, resp := buildRequestCreateCompany("success", input)
 
 	errorJsonString := `{"errors":[{"fieldName":"Name","reason":"required","value":""}],"message":"invalid request","type":"InvalidRequest"}`
 
-	suite.router.ServeHTTP(resp, req)
+	s.router.ServeHTTP(resp, req)
 
-	suite.Equal(http.StatusBadRequest, resp.Code)
-	suite.Equal(errorJsonString, replaceResponse(resp.Body.Bytes()))
+	s.Equal(http.StatusBadRequest, resp.Code)
+	s.Equal(errorJsonString, replaceResponse(resp.Body.Bytes()))
 }
 
-func (suite *AppTestSuite) Test_CreateCompany_MethodNotFound() {
+func (s *AppTestSuite) Test_CreateCompany_MethodNotFound() {
 	input := &company.CreateCompanyInput{Name: "CompanyTest"}
 	req, resp := buildRequestCreateCompany("notFound", input)
 
-	suite.router.ServeHTTP(resp, req)
+	s.router.ServeHTTP(resp, req)
 
-	suite.Equal(http.StatusNotFound, resp.Code)
+	s.Equal(http.StatusNotFound, resp.Code)
 }
