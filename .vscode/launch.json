@@ -18,18 +18,7 @@
             "port": 8080,
             "host": "127.0.0.1",
             "program": "${workspaceFolder}",
-            "env": {
-                "APP_NAME": "4pl-user-management",
-                "APP_PORT": 8080,
-                "JAEGER_AGENT_HOST": "localhost",
-                "JAEGER_AGENT_PORT": 6831,
-                "FMS_ENDPOINT": "http://localhost/fms",
-                "TMS_ENDPOINT": "http://localhost/tms",
-                "MONGODB_ENDPOINT": "mongodb://admin:admin@localhost/?connect=direct",
-                "MONGODB_NAME": "4pl-user-management-test",
-                "MONGODB_USER_TABLE_NAME": "users_test",
-                "PROCESS_MANAGER_ENDPOINT": "http://localhost/api/process-manager"
-            },
+            "env": {},
             "showLog": true
         }
     ]
